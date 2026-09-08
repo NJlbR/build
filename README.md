@@ -60,10 +60,20 @@
 
 ---
 
+## 📦 Готовый плагин (JAR)
+
+Скомпилированный файл: **[dist/TownyArchitecture-1.1.0.jar](dist/TownyArchitecture-1.1.0.jar)**
+
+Скачать: https://github.com/NJlbR/build/raw/arena/01a080ea-build/dist/TownyArchitecture-1.1.0.jar
+
+Положите JAR в папку `plugins/` сервера Paper 1.20+.
+
+---
+
 ## 🛠 Сборка проекта
 
 Сборка осуществляется с помощью Maven:
 ```bash
 mvn clean package
 ```
-Готовый JAR-файл будет создан в папке `target/TownyArchitecture-1.1.0.jar`.
+Готовый JAR-файл будет создан в папке `target/TownyArchitecture-1.1.0.jar` (копия публикуется в `dist/`).
