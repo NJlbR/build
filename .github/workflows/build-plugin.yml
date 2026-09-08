@@ -1,0 +1,61 @@
+name: Build plugin
+
+on:
+  push:
+    branches:
+      - 'arena/**'
+    paths-ignore:
+      - '**/*.jar'
+      - 'dist/**'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+
+      - name: Build with Maven
+        run: mvn -B -DskipTests clean package
+
+      - name: Show build output
+        run: |
+          ls -lh target/*.jar
+          unzip -l target/TownyArchitecture-*.jar | head -40
+
+      - name: Commit JAR to repository
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir -p dist
+          rm -f dist/*.jar
+          cp target/TownyArchitecture-*.jar dist/
+          rm -f dist/*-sources.jar dist/*-javadoc.jar dist/original-*.jar || true
+          ls -lh dist/
+          git add -f dist/*.jar
+          if git diff --cached --quiet; then
+            echo "JAR unchanged, nothing to commit"
+          else
+            git commit -m "Add compiled TownyArchitecture plugin JAR"
+            git push origin "HEAD:${{ github.ref_name }}"
+          fi
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: TownyArchitecture
+          path: dist/*.jar
+          if-no-files-found: error
