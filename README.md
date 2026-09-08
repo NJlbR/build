@@ -64,8 +64,6 @@
 
 Скомпилированный файл: **[dist/TownyArchitecture-1.1.0.jar](dist/TownyArchitecture-1.1.0.jar)**
 
-Скачать: https://github.com/NJlbR/build/raw/arena/01a080ea-build/dist/TownyArchitecture-1.1.0.jar
-
 Положите JAR в папку `plugins/` сервера Paper 1.20+.
 
 ---
