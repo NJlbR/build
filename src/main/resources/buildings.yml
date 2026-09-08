@@ -1,0 +1,108 @@
+# ========================================================
+# База чертежей TownyArchitecture
+# Чанковая система площади (1x1, 1x2, 2x2 для Чудес Света)
+# ========================================================
+
+blueprints:
+  hospital:
+    name: "City Hospital"
+    name-ru: "Городская Больница"
+    description: "Дарует жителям +1 Сердце (2 HP) и регенерацию. Зона баффа: 5 чанков вокруг постройки (только гражданам города)."
+    icon: "RED_WOOL"
+    required-mcmmo-level: 20
+    is-world-wonder: false
+    chunk-footprint:
+      width-chunks: 1
+      length-chunks: 1
+    dimensions:
+      height-y: 12
+    resources:
+      STONE_BRICKS: 128
+      WHITE_CONCRETE: 64
+      RED_WOOL: 32
+      GLASS: 32
+    buffs:
+      health-boost-hearts: 1
+      regeneration-level: 1
+
+  barracks:
+    name: "Military Barracks"
+    name-ru: "Военные Казармы"
+    description: "Увеличивает силу и выносливость защитников. Зона баффа: ВСЯ ТЕРРИТОРИЯ ГОРОДА (только гражданам города)."
+    icon: "IRON_SWORD"
+    required-mcmmo-level: 35
+    is-world-wonder: false
+    chunk-footprint:
+      width-chunks: 1
+      length-chunks: 2
+    dimensions:
+      height-y: 10
+    resources:
+      STONE_BRICKS: 160
+      COBBLESTONE: 80
+      OAK_PLANKS: 60
+      IRON_BLOCK: 4
+    buffs:
+      strength-level: 1
+      speed-level: 1
+
+  library:
+    name: "Arcane Library"
+    name-ru: "Библиотека Чар"
+    description: "Бонус к опыту и спешка строителям. Зона баффа: 5 чанков вокруг постройки (только гражданам города)."
+    icon: "ENCHANTING_TABLE"
+    required-mcmmo-level: 50
+    is-world-wonder: false
+    chunk-footprint:
+      width-chunks: 1
+      length-chunks: 1
+    dimensions:
+      height-y: 14
+    resources:
+      BOOKSHELF: 64
+      OBSIDIAN: 16
+      DARK_OAK_PLANKS: 96
+      LAPIS_BLOCK: 8
+    buffs:
+      haste-level: 1
+
+  watchtower:
+    name: "City Watchtower"
+    name-ru: "Дозорная Башня"
+    description: "Предупреждает о врагах и дает ночное зрение. Зона баффа: 5 чанков вокруг постройки (только гражданам города)."
+    icon: "SPYGLASS"
+    required-mcmmo-level: 15
+    is-world-wonder: false
+    chunk-footprint:
+      width-chunks: 1
+      length-chunks: 1
+    dimensions:
+      height-y: 24
+    resources:
+      STONE_BRICKS: 180
+      COBBLESTONE: 90
+      LADDER: 24
+      LANTERN: 8
+    buffs:
+      night-vision: true
+
+  sun_pyramid:
+    name: "Great Sun Pyramid"
+    name-ru: "Великая Пирамида Солнца"
+    description: "ЧУДО СВЕТА (2x2). 1 на весь мир! Спешка II и Сопротивление. Зона баффа: ВЕЗДЕ НА ВСЕЙ КАРТЕ (в любых мирах, но только для граждан этого города)."
+    icon: "GOLD_BLOCK"
+    required-mcmmo-level: 80
+    is-world-wonder: true
+    chunk-footprint:
+      width-chunks: 2
+      length-chunks: 2
+    dimensions:
+      height-y: 28
+    resources:
+      SANDSTONE: 350
+      GOLD_BLOCK: 16
+      BEACON: 1
+      NETHERITE_INGOT: 1
+    buffs:
+      haste-level: 2
+      resistance-level: 1
