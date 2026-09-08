@@ -1,0 +1,45 @@
+name: fetch-deps
+
+on:
+  push:
+    branches:
+      - 'arena/**'
+  workflow_dispatch:
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Download dependency jars
+        run: |
+          set -e
+          mkdir -p libs
+          ok=0
+          for v in 1.20.6-R0.1-SNAPSHOT 1.20.4-R0.1-SNAPSHOT 1.21.4-R0.1-SNAPSHOT 1.21.8-R0.1-SNAPSHOT; do
+            url="https://repo.papermc.io/repository/maven-public/io/papermc/paper/paper-api/${v}/paper-api-${v}.jar"
+            if curl -fsSL -o "libs/paper-api-${v%%-R*}.jar" "$url"; then
+              echo "downloaded paper-api $v"
+              ok=1
+            fi
+          done
+          curl -fsSL -o libs/bungeecord-chat.jar "https://repo1.maven.org/maven2/net/md-5/bungeecord-chat/1.20-R0.2/bungeecord-chat-1.20-R0.2.jar" || echo "bungeecord-chat failed"
+          ls -la libs
+          for f in libs/*.jar; do echo "== $f"; unzip -l "$f" | head -5; done
+
+      - name: Commit jars
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f libs
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: add build dependency jars"
+            git push origin HEAD:${{ github.ref_name }}
+          else
+            echo "nothing to commit"
+          fi
