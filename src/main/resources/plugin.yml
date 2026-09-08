@@ -1,0 +1,25 @@
+name: TownyArchitecture
+version: 1.1.0
+main: com.towny.architecture.TownyArchitecturePlugin
+api-version: '1.20'
+author: TownyArchitectureTeam
+description: Городские постройки и Чудеса Света с чанковой системой, строгим mcMMO и баффами.
+softdepend: [Towny, mcMMO]
+
+commands:
+  builds:
+    description: Открыть меню городских построек или управлять участками
+    aliases: [build, architecture, tb]
+    permission: townyarchitecture.use
+    usage: /<command> [help|info|repair|plot]
+
+permissions:
+  townyarchitecture.use:
+    description: Доступ к просмотру чертежей и статуса построек города
+    default: true
+  townyarchitecture.builder:
+    description: Право возводить блоки на строительных чанках города
+    default: op
+  townyarchitecture.admin:
+    description: Административные команды плагина
+    default: op
